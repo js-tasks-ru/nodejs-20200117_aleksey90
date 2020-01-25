@@ -6,7 +6,6 @@ class LimitSizeStream extends stream.Transform {
     super(options);
     this.limit = options.limit;
     this.size = 0;
-    this.objMode = 
   }
 
   _transform(chunk, encoding, callback) {
