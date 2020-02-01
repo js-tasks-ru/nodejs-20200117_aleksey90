@@ -1,6 +1,7 @@
 const url = require('url');
 const http = require('http');
 const path = require('path');
+const fs = require('fs');
 
 const server = new http.Server();
 
@@ -11,7 +12,19 @@ server.on('request', (req, res) => {
 
   switch (req.method) {
     case 'DELETE':
-
+      if (pathname.indexOf(`/`) !== -1) {
+        res.statusCode = 400;
+        res.end(`Bad request`);
+      } else {
+        try {
+          fs.unlinkSync(filepath);
+          res.statusCode = 200;
+          res.end(`Success`);
+        } catch {
+          res.statusCode = 404;
+          res.end(`No such file`);
+        }
+      }
       break;
 
     default:
