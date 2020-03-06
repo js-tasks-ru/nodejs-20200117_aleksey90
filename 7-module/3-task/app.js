@@ -34,7 +34,7 @@ app.use((ctx, next) => {
     const token = uuid();
 
     // await Session.create({token, lastVisit: new Date(), user});
-    await Session.create({token, lastVisit: Date.now(), user});
+    await Session.create({token, user, lastVisit: Date.now()});
     return token;
   };
 
